@@ -50,7 +50,7 @@ fn main() -> std::io::Result<()> {
         (info.height & 0x0000ff00) >> 8,
         (info.height & 0x00ff0000) >> 16,
         (info.height & 0xff000000) >> 24)?;
-    write!(&mut output, "\t0x00, 0x00, 0x00, 0x00, // ui_pixel_format_t pf\n")?;
+    write!(&mut output, "\t0x08, 0x00, 0x00, 0x00, // ui_pixel_format_t pf\n")?;
     write!(&mut output, "\t0x{:02x}, 0x{:02x}, 0x{:02x}, 0x{:02x}, // uint32_t header_size\n",
         (56u32 & 0x000000ff),
         (56u32 & 0x0000ff00) >> 8,
