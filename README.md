@@ -18,6 +18,10 @@ $ curl https://sh.rustup.rs -sSf | sh
 Run the converter
 ```sh
 $ cargo run sample.png sample.c
+```
+
+View converted source file
+```sh
 $ ./viewer.sh sample.c
 ```
 
