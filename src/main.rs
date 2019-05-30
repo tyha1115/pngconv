@@ -1,8 +1,6 @@
 extern crate png;
 
-use std::fs::File;
 use std::io::Write;
-use std::io::prelude::*;
 
 fn main() -> std::io::Result<()> {
     let args: Vec<String> = std::env::args().collect();
@@ -26,7 +24,7 @@ fn main() -> std::io::Result<()> {
     // The default options
     reader.next_frame(&mut buf).unwrap();
 
-    let mut output = std::fs::File::create("foo.txt");
+    let mut output = std::fs::File::create("foo.txt").unwrap();
 
     let data = b"some bytes";
 
@@ -39,5 +37,18 @@ fn main() -> std::io::Result<()> {
         let rgb565 = ((r >> 3) << 11) | ((g >> 2) << 5) | (b >> 3);
     }
 
+    output.write_all(b"Hello File!").unwrap();
+
     Ok(())
 }
+
+/*
+use std::fs::File;
+use std::io::Write;
+
+fn main() {
+    let data = "Some data!";
+    let mut f = File::create("/tmp/foo").expect("Unable to create file");
+    f.write_all(data.as_bytes()).expect("Unable to write data");
+}
+*/
