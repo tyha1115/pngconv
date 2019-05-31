@@ -102,13 +102,3 @@ fn main() -> std::io::Result<()> {
     Ok(())
 }
 
-/*
-use std::fs::File;
-use std::io::Write;
-
-fn main() {
-    let data = "Some data!";
-    let mut f = File::create("/tmp/foo").expect("Unable to create file");
-    f.write_all(data.as_bytes()).expect("Unable to write data");
-}
-*/
