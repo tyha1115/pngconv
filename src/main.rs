@@ -12,6 +12,9 @@ fn main() -> std::io::Result<()> {
         std::process::exit(0);
     }
 
+    let split = args[2].split(".");
+    let v_name: Vec<&str> = split.collect();
+
     let decoder = png::Decoder::new(std::fs::File::open(&args[1])?);
     let (info, mut reader) = decoder.read_info()?;
 
@@ -36,7 +39,7 @@ fn main() -> std::io::Result<()> {
     let mut output = std::fs::File::create(&args[2])?;
 
     write!(&mut output, "#include <stdint.h>\n\n")?;
-    write!(&mut output, "uint8_t buf[{}] = {{\n", info.buffer_size() + 56)?; // 56 means the header size
+    write!(&mut output, "uint8_t {}[{}] = {{\n", v_name[0], info.buffer_size() + 56)?; // 56 means the header size
 
     // Write header
     write!(&mut output, "\t0x00, 0x00, 0x00, 0x00, // uint32_t id\n")?;
