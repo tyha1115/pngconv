@@ -86,6 +86,8 @@ fn main() -> std::io::Result<()> {
 
         if count != ((info.buffer_size() / 4) - 1) {
             write!(&mut output, ", ")?;
+        } else {
+            write!(&mut output, "\n")?;
         }
 
         if (count + 1) % 16 == 0 {
