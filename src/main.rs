@@ -76,7 +76,7 @@ fn main() -> std::io::Result<()> {
         let b: u8 = buf[i + 2];
         let a: u8 = buf[i + 3];
         let hibyte: u8 = (r & 0b11111000) | ((g & 0b11100000) >> 5);
-        let lobyte: u8 = ((g & 0b00011100) << 3) | (b & 0b00011111);
+        let lobyte: u8 = ((g & 0b00011100) << 3) | ((b & 0b11111000) >> 3);
 
         if count % 16 == 0 {
             write!(&mut output, "\t")?;
