@@ -39,7 +39,7 @@ fn main() -> std::io::Result<()> {
     let mut output = std::fs::File::create(&args[2])?;
 
     write!(&mut output, "#include <stdint.h>\n\n")?;
-    write!(&mut output, "uint8_t {}[{}] = {{\n", v_name[0], info.buffer_size() + 56)?; // 56 means the header size
+    write!(&mut output, "const uint8_t {}[{}] = {{\n", v_name[0], info.buffer_size() + 56)?; // 56 means the header size
 
     // Write header
     write!(&mut output, "\t0x00, 0x00, 0x00, 0x00, // uint32_t id\n")?;
@@ -76,7 +76,7 @@ fn main() -> std::io::Result<()> {
         let b: u8 = buf[i + 2];
         let a: u8 = buf[i + 3];
         let hibyte: u8 = (r & 0b11111000) | ((g & 0b11100000) >> 5);
-        let lobyte: u8 = ((g & 0b00011100) << 3) | (b & 0b00011111);
+        let lobyte: u8 = ((g & 0b00011100) << 3) | ((b & 0b11111000) >> 3);
 
         if count % 16 == 0 {
             write!(&mut output, "\t")?;
